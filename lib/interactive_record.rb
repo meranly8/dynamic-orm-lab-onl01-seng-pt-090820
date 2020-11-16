@@ -32,15 +32,16 @@ class InteractiveRecord
     DB[:conn].execute("SELECT * FROM #{table_name} WHERE name = ?", [name])
   end
 
-  def self.find_by(attr_hash)
-    value = attr_hash.values.first
-    formatted_value = value.class == Fixnum ?   value : "'value'"
+  def self.find_by(attr)
+    column_name = attr.keys[0].to_s
+    value_name = attr.values[0]
+
     sql = <<-SQL
-      SELECT * FROM #{self.table_name}
-      WHERE #{attr_hash.keys.first} = #{formatted_value}
+      SELECT * FROM #{table_name}
+      WHERE #{column_name} = ?
     SQL
 
-    DB[:conn].execute(sql)
+    DB[:conn].execute(sql, value_name)
   end
 
 end
