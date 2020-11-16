@@ -40,14 +40,14 @@ class InteractiveRecord
 
   def self.find_by(attr_hash)
     column_name = attr_hash.keys[0].to_s
-    value_name = attr_hash.values[0]
+    value = attr_hash.values[0]
 
     sql = <<-SQL
       SELECT * FROM #{table_name}
       WHERE #{column_name} = ?
     SQL
 
-    DB[:conn].execute(sql, value_name)
+    DB[:conn].execute(sql, value)
   end
 
 end
