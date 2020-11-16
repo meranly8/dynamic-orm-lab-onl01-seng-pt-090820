@@ -36,10 +36,10 @@ class InteractiveRecord
     value = attr_hash.values.first
     formatted_value = value.class == Fixnum ?   value : "'value'"
     sql = <<-SQL
-      SELECT * FROM #{self.table_name} 
+      SELECT * FROM #{self.table_name}
       WHERE #{attr_hash.keys.first} = #{formatted_value}
     SQL
-    
+
     DB[:conn].execute(sql)
   end
 
