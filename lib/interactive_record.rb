@@ -38,9 +38,9 @@ class InteractiveRecord
     DB[:conn].execute("SELECT * FROM #{table_name} WHERE name = ?", [name])
   end
 
-  def self.find_by(attr)
-    column_name = attr.keys[0].to_s
-    value_name = attr.values[0]
+  def self.find_by(attr_hash)
+    column_name = attr_hash.keys[0].to_s
+    value_name = attr_hash.values[0]
 
     sql = <<-SQL
       SELECT * FROM #{table_name}
